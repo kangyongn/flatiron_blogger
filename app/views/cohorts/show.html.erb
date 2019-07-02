@@ -1,0 +1,54 @@
+<main role="main">
+  <div class="jumbotron">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h1><%= @cohort.name %></h1>
+          <h3><i>Mod <%= @cohort.mod %></i></h3>
+          <hr>
+          <h1>TCF</h1>
+          <% @tcfs.each do |tcf| %>
+          <% if tcf.id == @logged_in_user.id %>
+          <h3><%= tcf.name %> <i>(Me)</i></h3>
+          <% else %>
+          <h3><%= tcf.name %></h3>
+          <% end %>
+          <% end %>
+          <% if @logged_in_user.role == 'TCF' %>
+          <hr>
+          <h1>Edit Cohort</h1>
+          <a class="font-flatiron btn btn-secondary" href="/cohorts/<%= @cohort.id %>/edit" role="button">Edit <i><%= @cohort.name %></i> &raquo;</a><br><br>
+          <% end %>
+        </div>
+        <div class="col-md-6">
+          <h1>Students</h1>
+          <% @students.each do |student| %>
+          <% if @logged_in_user.role == 'Student' && @logged_in_user.id == student.id %>
+          <a class="font-flatiron btn btn-secondary" href="/student/<%= student.id %>/home" role="button"><%= student.name %> <i>(Me)</i> &raquo;</a><br><br>
+          <% else %>
+          <a class="font-flatiron btn btn-secondary" href="/students/<%= student.id %>/" role="button"><%= student.name %> &raquo;</a><br><br>
+          <% end %>
+          <% end %>
+        </div>
+      </div>
+      <hr>
+    </div>
+  </div>
+</main>
+
+<footer class="container">
+  <p>&copy; Flatiron Blogger 2019-2019</p>
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script>
+  window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
+</script>
+<script src="../../assets/js/vendor/popper.min.js"></script>
+<script src="../../dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mod2FlatironBlogger</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="sticky-footer.css" rel="stylesheet">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Flatiron Blogger</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <% unless @logged_in %>
+        <div class="collapse navbar-collapse" id="navbarsExample02">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <%= link_to 'Login', login_path %>
+            </li>
+            <li class="nav-item active">
+              <%= link_to 'Signup', new_user_path %>
+            </li>
+          </ul>
+        </div>
+      <% else %>
+          <div class="collapse navbar-collapse" id="navbarsExample02">
+            <ul class="navbar-nav mr-auto">
+              <% if @logged_in_user.role == 'TCF' %>
+                <li class="nav-item active">
+                  <%= link_to "#{@logged_in_user.name}", home_tcf_path(@logged_in_user) %>
+                </li>
+                <li class="nav-item active">
+                  <%= link_to 'Signout', signout_path, method: :delete %>
+                </li>
+              <% else %>
+                <li class="nav-item active">
+                  <%= link_to "#{@logged_in_user.name}", home_student_path(@logged_in_user)%>
+                </li>
+                <li class="nav-item active">
+                  <%= link_to 'Signout', signout_path, method: :delete %>
+                </li>
+              <% end  %>
+            <% end %>
+            </ul>
+          </div>
+        </nav>
+        <img class="mb-4 center" src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Flatiron-School-Horizontal-Blue-grey.png">
+    <div class="basic-font text-center">
+    <%= yield %>
+    </div>
+  </body>
+</html>

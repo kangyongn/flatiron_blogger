@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<section class="text-center ">
+  <h1 class="h3 mb-3 font-weight-normal basic-font ">Please sign in</h1>
+  <form class="form-signin " , action='/login' , method='post'>
+    <div class='text_center'>
+      <% if flash[:errors].present? %>
+      <% flash[:errors].each do |message| %>
+      <%= message.downcase.capitalize %>.<br>
+      <% end %>
+      <% end %>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-6">
+        <label for="inputUsername" class="sr-only">Email address</label>
+        <input type="text" id="inputUsername" class="form-control" name="username" placeholder="Username" required autofocus><br>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" name='password' placeholder="Password" required><br>
+        <button class="btn btn-lg btn-primary btn-block basic-font" type="submit">Sign in</button>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+  </form>
+</section>

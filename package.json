@@ -1,0 +1,11 @@
+{
+  "name": "mod-2-flatiron-blogger",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "^4.3.1"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "<github username> <<github email address>>",
+  "license": "MIT"
+}

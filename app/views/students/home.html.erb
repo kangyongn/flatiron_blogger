@@ -1,0 +1,65 @@
+<main role="main">
+  <div class="jumbotron">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h1>Welcome, <%= @user.name %>!</h1>
+          <hr>
+          <h2>My Mod</h2>
+          <h4><%= link_to @user.cohort.name, @user.cohort %> <i>(Mod <%= @user.cohort.mod %>)</i></h4>
+          <hr>
+          <h2>My TCFs</h2>
+          <% @tcfs.each do |tcf| %>
+          <h4><%= tcf.name %></h4>
+          <% end %>
+          <hr>
+          <h2>Blogs Due</h2>
+          <% @blogs.each do |blog| %>
+          <% if blog.title == nil %>
+          <a class="font-flatiron btn btn-secondary" href="/blogs/<%= blog.id %>/edit" role="button"><%= blog.due_date %> &raquo;</a><br><br>
+          <% end %>
+          <% end %>
+        </div>
+
+        <div class="col-md-4">
+          <h2>My Modmates</h2>
+          <% @students.each do |student| %>
+          <% unless student.id == session[:user_id] %>
+          <a class="font-flatiron btn btn-secondary" href="/students/<%= student.id %>" role="button"><%= student.name %> &raquo;</a><br><br>
+          <% end %>
+          <% end %>
+        </div>
+
+        <div class="col-md-4">
+          <h2>My Blogs</h2>
+          <% @blogs.each do |blog| %>
+          <% if blog.title != nil %>
+          <a class="font-flatiron btn btn-secondary" href="/blogs/<%= blog.id %>" role="button"><%= blog.title %> &raquo;</a><br><br>
+          <% end %>
+          <% end %>
+          <hr><br>
+          <h2>Post Blog</h2>
+          <a class="font-flatiron btn btn-secondary" href="/blogs/new" role="button">Post Blog &raquo;</a><br>
+        </div>
+      </div>
+      <hr>
+    </div>
+  </div>
+</main>
+
+<footer class="container">
+  <p>&copy; Flatiron Blogger 2019-2019</p>
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script>
+  window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
+</script>
+<script src="../../assets/js/vendor/popper.min.js"></script>
+<script src="../../dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>

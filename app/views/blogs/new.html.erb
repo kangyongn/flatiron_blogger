@@ -1,0 +1,60 @@
+<main role="main">
+  <div class="jumbotron">
+    <div class="container">
+      <% if @logged_in_user.role == 'TCF' %>
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Assign Blog</h1>
+          <hr>
+          <%= form_for(@blog) do |f| %>
+          <%= f.label :student%>:
+          <%= f.collection_select(:user_id, @students, :id, :name) %>
+          <br><br>
+          <%= f.label :due_date %>:
+          <%= f.text_field :due_date, placeholder: 'MM/DD/YY' %>
+          <br><br>
+          <button class="btn btn-lg btn-primary btn-block basic-font" type="submit">Assign Blog</button>
+          <% end %>
+        </div>
+      </div>
+      <% else %>
+      <div class="row">
+        <div class="col-md-12">
+          <h1>New Blog</h1>
+          <hr>
+          <div class="form-group">
+            <form action='/blogs' ,="," method='post'>
+              <label for="title">Title</label>
+              <input type="text" id="title" class="form-control" name="blog[title]" placeholder="Title" required="required"><br>
+              <label for="content">Blog</label>
+              <textarea class="form-control" rows="10" id="content" name="blog[content]" placeholder="Write your blog here" required="required"></textarea><br>
+              <label for="due_date">Today's Date</label>
+              <input type="text" id="due_date" class="form-control" name="blog[due_date]" placeholder="MM/DD/YY" required="required"><br>
+              <input type="hidden" id="user_id" name="blog[user_id]" value="<%= @logged_in_user.id %>" %="%">
+              <button class="btn btn-lg btn-primary btn-block basic-font" type="submit">Post Blog</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <% end %>
+      <br>
+      <hr>
+    </div>
+  </div>
+</main>
+
+<footer class="container">
+  <p>&copy; Flatiron Blogger 2019-2019</p>
+</footer>
+
+<!-- Bootstrap core JavaScript ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script>
+  window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
+</script>
+<script src="../../assets/js/vendor/popper.min.js"></script>
+<script src="../../dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>
